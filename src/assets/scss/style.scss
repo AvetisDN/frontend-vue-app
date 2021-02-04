@@ -1,0 +1,189 @@
+@import './reset';
+@import './fonts';
+
+#app {
+    --bg-image: url('../images/bg1-light.jpg');
+    --bg-color: #3a75c2;
+    --text-color: #142533;
+    --shadow-color: 15,25,50;
+    --highlight: 255,255,255;
+    --ui-color: 255,255,255;
+    --ui-color-link: 255,255,255;
+    --ui-primary: #22579c;
+    --ui-secondary: #c83a76;
+
+    &.dark {
+        --bg-image: url('../images/bg2-dark.jpg');
+        --bg-color: #3f3e74;
+        --text-color: #fff;
+        --shadow-color: 15,25,50;
+        --highlight: 0,0,0;
+        --ui-color: 0,0,0;
+        --ui-color-link: 255,255,255;
+        --ui-primary: #3572c2;
+        --ui-secondary: #df6598;
+    }
+    min-height: 100vh;
+    background: var(--bg-image) center top fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    .wrapper {
+        margin: 2rem;
+        width: 100%;
+        max-width: 1400px;
+        background-color: rgba(var(--ui-color), .2);
+        backdrop-filter: blur(40px);
+        border-radius: 1.5rem;
+        box-shadow: rgba(var(--shadow-color),.3) 0 5px 15px, inset rgba(var(--highlight), .5) 0 0 3px;
+        display: flex;
+        color: var(--text-color);
+        overflow: hidden;
+        // text-shadow: rgba(var(--shadow-color),.5) 0 1px 1px;
+
+        @media screen and(max-width: 1350px) {
+            margin: 1rem;
+        }
+
+        @media screen and(max-width: 540px) {
+            margin: 0;
+            border-radius: 0;
+            flex-direction: column;
+        }
+        .sidebar {
+            @media screen and(max-width: 540px) {
+                order: 1;
+            }
+            .logo {
+                padding: 2.5rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                a {
+                    font-size: 2.5rem;
+                    font-weight: bold;
+                    text-shadow: rgba(var(--highlight),.7) 0 0 10px;
+                    color: var(--ui-primary);
+                    text-decoration: none;
+                    span {
+                        color: var(--ui-secondary);
+                    }
+                }
+                &::after {
+                    display: block;
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 10%;
+                    width: 80%;
+                    height: 1px;
+                    background-color: var(--ui-secondary);
+                }
+
+                @media screen and(max-width: 1350px) {
+                    display: none;
+                }
+            }
+            nav {
+                padding: 2rem 2rem 0 0;
+                @media screen and(max-width: 1350px) {
+                    padding-right: 0;
+                }
+                @media screen and(max-width: 540px) {
+                    padding-top: 0;
+                }
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    @media screen and(max-width: 540px) {
+                        flex-direction: row;
+                        justify-content: center;
+                        overflow-x: auto;
+                    }
+                    li {
+                        a, div {
+                            cursor: pointer;
+                            text-decoration: none;
+                            display: flex;
+                            align-items: center;
+                            color: rgba(var(--ui-color-link), 1);
+                            padding: 1rem 1.5rem;
+                            border-radius: 0 1rem 1rem 0;
+                            transition: .2s ease;
+                            white-space: nowrap;
+                            &:hover {
+                                background-color: rgba(var(--ui-color), .1);
+                            }
+                            &.router-link-exact-active {
+                                background-color: rgba(var(--ui-color), .2);
+                            }
+                            i {
+                                font-size: 1.5em;
+                                margin-right: 1rem;
+
+                                @media screen and(max-width: 1350px) {
+                                    margin-right: 0;
+                                }
+                            }
+                            span {
+                                @media screen and(max-width: 1350px) {
+                                    display: none;
+                                }
+                            }
+                            @media screen and(max-width: 1350px) {
+                                border-radius: 0;
+                            }
+                            @media screen and(max-width: 540px) {
+                                padding: 1rem;
+                                font-size: 1rem;
+                            }
+                        }
+                        div {
+                          &::after {
+                            display: block;
+                            font-family: "IcoFont";
+                            content: "\ec3e";
+                            font-size: .5em;
+                            margin-left: 1rem;
+                            transition: .2s ease;
+
+                            @media screen and(max-width: 1350px) {
+                                display: none;
+                            }
+                          }  
+                        }
+                        ul {
+                            display: none;
+                            font-size: .8em;
+                            margin-left: 3rem;
+                            a {
+                                display: inline-block;
+                                border-radius: 1rem;
+                            }
+                        }
+                        div.open {
+                            &::after {
+                                transform: rotate(135deg);
+                            }
+                            &+ul{
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .content {
+            flex-grow: 1;
+            background-color: rgba(var(--ui-color), .1);
+            padding: 2rem;
+            @media screen and(max-width: 540px) {
+                height: calc(100vh - 3.5rem);
+                overflow: auto;
+            }
+        }
+    }
+}
